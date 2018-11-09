@@ -1,8 +1,6 @@
 #!/bin/sh
-echo "DEBUG: post_push"
 
-docker tag $IMAGE_NAME $DOCKER_REPO:latest
-docker push $DOCKER_REPO:latest
-
-echo "DEBUG: printenv"
-printenv
+echo $DOCKER_TAG \
+|  grep -q '^5\.0\..*.' \
+&& docker tag $IMAGE_NAME $DOCKER_REPO:latest \
+&& docker push $DOCKER_REPO:latest
